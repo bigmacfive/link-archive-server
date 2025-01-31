@@ -3160,6 +3160,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.96",
+ "uuid",
 ]
 
 [[package]]
@@ -3168,6 +3169,7 @@ version = "9.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "161166ec520c50144922a625d8bc4925cc801b2dda958ab69878527c0e5c5d61"
 dependencies = [
+ "actix-web",
  "base64 0.22.1",
  "mime_guess",
  "regex",

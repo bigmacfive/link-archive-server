@@ -3,8 +3,9 @@ use sqlx::FromRow;
 use time::OffsetDateTime;
 use uuid::Uuid;
 use validator::Validate;
+use utoipa::ToSchema;
 
-#[derive(Debug, Serialize, Deserialize, FromRow)]
+#[derive(Debug, Serialize, Deserialize, FromRow, ToSchema)]
 pub struct User {
     pub id: Uuid,
     pub username: String,
@@ -15,7 +16,7 @@ pub struct User {
     pub updated_at: OffsetDateTime,
 }
 
-#[derive(Debug, Serialize, Deserialize, Validate)]
+#[derive(Debug, Serialize, Deserialize, Validate, ToSchema)]
 pub struct CreateUserRequest {
     #[validate(length(min = 3, max = 50))]
     pub username: String,
@@ -25,13 +26,13 @@ pub struct CreateUserRequest {
     pub password: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct LoginRequest {
     pub email: String,
     pub password: String,
 }
 
-#[derive(Debug, Serialize, Deserialize, FromRow)]
+#[derive(Debug, Serialize, Deserialize, FromRow, ToSchema)]
 pub struct Link {
     pub id: Uuid,
     pub user_id: Uuid,
@@ -43,31 +44,31 @@ pub struct Link {
     pub updated_at: OffsetDateTime,
 }
 
-#[derive(Debug, Serialize, Deserialize, Validate)]
+#[derive(Debug, Serialize, Deserialize, Validate, ToSchema)]
 pub struct CreateLinkRequest {
     #[validate(url)]
     pub url: String,
     pub tags: Option<Vec<String>>,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct UpdateLinkRequest {
     pub tags: Vec<String>,
 }
 
-#[derive(Debug, Serialize, Deserialize, FromRow)]
+#[derive(Debug, Serialize, Deserialize, FromRow, ToSchema)]
 pub struct Tag {
     pub id: Uuid,
     pub name: String,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct AuthResponse {
     pub token: String,
     pub user: User,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct LinkResponse {
     #[serde(flatten)]
     pub link: Link,

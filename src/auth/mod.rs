@@ -8,6 +8,16 @@ use validator::Validate;
 
 use crate::{db::Database, error::AppError, models::*};
 
+#[utoipa::path(
+    post,
+    path = "/auth/register",
+    request_body = CreateUserRequest,
+    responses(
+        (status = 200, description = "User registered successfully", body = AuthResponse),
+        (status = 400, description = "Validation error"),
+        (status = 500, description = "Internal server error")
+    )
+)]
 pub async fn register(db: web::Data<Database>, user: web::Json<CreateUserRequest>) -> Result<HttpResponse, AppError> {
     if let Err(e) = user.validate() {
         return Err(AppError::ValidationError(e.to_string()));
@@ -26,6 +36,16 @@ pub async fn register(db: web::Data<Database>, user: web::Json<CreateUserRequest
     Ok(HttpResponse::Ok().json(AuthResponse { token, user }))
 }
 
+#[utoipa::path(
+    post,
+    path = "/auth/login",
+    request_body = LoginRequest,
+    responses(
+        (status = 200, description = "Login successful", body = AuthResponse),
+        (status = 401, description = "Invalid credentials"),
+        (status = 500, description = "Internal server error")
+    )
+)]
 pub async fn login(db: web::Data<Database>, creds: web::Json<LoginRequest>) -> Result<HttpResponse, AppError> {
     let user = db.get_user_by_email(&creds.email).await?;
 
