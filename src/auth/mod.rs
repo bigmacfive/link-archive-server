@@ -4,6 +4,7 @@ mod middleware;
 
 use actix_web::{web, HttpResponse};
 use argon2::{password_hash::SaltString, Argon2, PasswordHasher, PasswordVerifier};
+use rand_core::OsRng;
 use validator::Validate;
 
 use crate::{db::Database, error::AppError, models::*};

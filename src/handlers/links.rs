@@ -16,6 +16,20 @@ pub fn configure(cfg: &mut web::ServiceConfig) {
     );
 }
 
+#[utoipa::path(
+    post,
+    path = "/api/links",
+    request_body = CreateLinkRequest,
+    responses(
+        (status = 201, description = "Link created successfully", body = LinkResponse),
+        (status = 400, description = "Validation error"),
+        (status = 401, description = "Unauthorized"),
+        (status = 500, description = "Internal server error")
+    ),
+    security(
+        ("bearer" = [])
+    )
+)]
 async fn create_link(
     db: web::Data<Database>,
     user_id: web::ReqData<Uuid>,
@@ -29,6 +43,18 @@ async fn create_link(
     Ok(HttpResponse::Created().json(link))
 }
 
+#[utoipa::path(
+    get,
+    path = "/api/links",
+    responses(
+        (status = 200, description = "List of user's links", body = Vec<LinkResponse>),
+        (status = 401, description = "Unauthorized"),
+        (status = 500, description = "Internal server error")
+    ),
+    security(
+        ("bearer" = [])
+    )
+)]
 async fn get_links(
     db: web::Data<Database>,
     user_id: web::ReqData<Uuid>,
@@ -37,6 +63,22 @@ async fn get_links(
     Ok(HttpResponse::Ok().json(links))
 }
 
+#[utoipa::path(
+    get,
+    path = "/api/links/{id}",
+    responses(
+        (status = 200, description = "Link details", body = LinkResponse),
+        (status = 401, description = "Unauthorized"),
+        (status = 404, description = "Link not found"),
+        (status = 500, description = "Internal server error")
+    ),
+    params(
+        ("id" = Uuid, Path, description = "Link ID")
+    ),
+    security(
+        ("bearer" = [])
+    )
+)]
 async fn get_link(
     db: web::Data<Database>,
     path: web::Path<Uuid>,
@@ -45,6 +87,23 @@ async fn get_link(
     Ok(HttpResponse::Ok().json(link))
 }
 
+#[utoipa::path(
+    put,
+    path = "/api/links/{id}",
+    request_body = UpdateLinkRequest,
+    responses(
+        (status = 200, description = "Link updated successfully", body = LinkResponse),
+        (status = 401, description = "Unauthorized"),
+        (status = 404, description = "Link not found"),
+        (status = 500, description = "Internal server error")
+    ),
+    params(
+        ("id" = Uuid, Path, description = "Link ID")
+    ),
+    security(
+        ("bearer" = [])
+    )
+)]
 async fn update_link(
     db: web::Data<Database>,
     path: web::Path<Uuid>,
@@ -54,6 +113,22 @@ async fn update_link(
     Ok(HttpResponse::Ok().json(link))
 }
 
+#[utoipa::path(
+    delete,
+    path = "/api/links/{id}",
+    responses(
+        (status = 204, description = "Link deleted successfully"),
+        (status = 401, description = "Unauthorized"),
+        (status = 404, description = "Link not found"),
+        (status = 500, description = "Internal server error")
+    ),
+    params(
+        ("id" = Uuid, Path, description = "Link ID")
+    ),
+    security(
+        ("bearer" = [])
+    )
+)]
 async fn delete_link(
     db: web::Data<Database>,
     path: web::Path<Uuid>,

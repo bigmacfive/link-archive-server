@@ -11,6 +11,6 @@ pub fn configure(cfg: &mut web::ServiceConfig) {
     );
 }
 
-pub fn auth_middleware() -> HttpAuthentication {
+pub fn auth_middleware() -> HttpAuthentication<Bearer, auth_validator> {
     HttpAuthentication::bearer(middleware::auth_validator)
 }

@@ -80,7 +80,7 @@ impl Database {
                 .bind(link.id)
                 .bind(tag.id)
                 .execute(&mut *tx)
-                .await?
+                .await?;
             }
         }
 
@@ -141,12 +141,12 @@ impl Database {
     }
 
     pub async fn update_link(&self, id: Uuid, update: &UpdateLinkRequest) -> Result<LinkResponse, AppError> {
-        let mut tx = self.pool.begin().await?
+        let mut tx = self.pool.begin().await?;
 
         sqlx::query("DELETE FROM link_tags WHERE link_id = $1")
             .bind(id)
             .execute(&mut *tx)
-            .await?
+            .await?;
 
         for tag_name in &update.tags {
             let tag = sqlx::query_as::<_, Tag>(
@@ -171,7 +171,7 @@ impl Database {
             .bind(id)
             .bind(tag.id)
             .execute(&mut *tx)
-            .await?
+            .await?;
         }
 
         let link = sqlx::query_as::<_, Link>(
@@ -190,19 +190,19 @@ impl Database {
     }
 
     pub async fn delete_link(&self, id: Uuid) -> Result<(), AppError> {
-        let mut tx = self.pool.begin().await?
+        let mut tx = self.pool.begin().await?;
 
         sqlx::query("DELETE FROM link_tags WHERE link_id = $1")
             .bind(id)
             .execute(&mut *tx)
-            .await?
+            .await?;
 
         sqlx::query("DELETE FROM links WHERE id = $1")
             .bind(id)
             .execute(&mut *tx)
-            .await?
+            .await?;
 
-        tx.commit().await?
+        tx.commit().await?;
 
         Ok(())
     }
