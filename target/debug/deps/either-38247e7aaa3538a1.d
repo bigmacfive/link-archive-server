@@ -1,0 +1,11 @@
+/Users/manzi/Desktop/side-proj/link-archive-server/target/debug/deps/libeither-38247e7aaa3538a1.rmeta: /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/lib.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/serde_untagged.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/serde_untagged_optional.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/iterator.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/into_either.rs
+
+/Users/manzi/Desktop/side-proj/link-archive-server/target/debug/deps/libeither-38247e7aaa3538a1.rlib: /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/lib.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/serde_untagged.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/serde_untagged_optional.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/iterator.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/into_either.rs
+
+/Users/manzi/Desktop/side-proj/link-archive-server/target/debug/deps/either-38247e7aaa3538a1.d: /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/lib.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/serde_untagged.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/serde_untagged_optional.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/iterator.rs /Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/into_either.rs
+
+/Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/lib.rs:
+/Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/serde_untagged.rs:
+/Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/serde_untagged_optional.rs:
+/Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/iterator.rs:
+/Users/manzi/.cargo/registry/src/index.crates.io-6f17d22bba15001f/either-1.13.0/src/into_either.rs:
