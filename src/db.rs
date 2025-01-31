@@ -24,7 +24,7 @@ impl Database {
         .bind(&user.email)
         .bind(password_hash)
         .fetch_one(&self.pool)
-        .await?
+        .await?;
 
         Ok(user)
     }
@@ -35,13 +35,13 @@ impl Database {
         )
         .bind(email)
         .fetch_one(&self.pool)
-        .await?
+        .await?;
 
         Ok(user)
     }
 
     pub async fn create_link(&self, user_id: Uuid, link: &CreateLinkRequest) -> Result<Link, AppError> {
-        let mut tx = self.pool.begin().await?
+        let mut tx = self.pool.begin().await?;
 
         let link = sqlx::query_as::<_, Link>(
             "
@@ -54,7 +54,7 @@ impl Database {
         .bind(user_id)
         .bind(&link.url)
         .fetch_one(&mut *tx)
-        .await?
+        .await?;
 
         if let Some(tags) = &link.tags {
             for tag_name in tags {
@@ -69,7 +69,7 @@ impl Database {
                 .bind(Uuid::new_v4())
                 .bind(tag_name)
                 .fetch_one(&mut *tx)
-                .await?
+                .await?;
 
                 sqlx::query(
                     "
@@ -84,7 +84,7 @@ impl Database {
             }
         }
 
-        tx.commit().await?
+        tx.commit().await?;
 
         Ok(link)
     }
@@ -95,7 +95,7 @@ impl Database {
         )
         .bind(id)
         .fetch_one(&self.pool)
-        .await?
+        .await?;
 
         let tags = sqlx::query_scalar::<_, String>(
             "
@@ -107,7 +107,7 @@ impl Database {
         )
         .bind(id)
         .fetch_all(&self.pool)
-        .await?
+        .await?;
 
         Ok(LinkResponse { link, tags })
     }
@@ -118,7 +118,7 @@ impl Database {
         )
         .bind(user_id)
         .fetch_all(&self.pool)
-        .await?
+        .await?;
 
         let mut responses = Vec::new();
         for link in links {
@@ -132,7 +132,7 @@ impl Database {
             )
             .bind(link.id)
             .fetch_all(&self.pool)
-            .await?
+            .await?;
 
             responses.push(LinkResponse { link, tags });
         }
@@ -160,7 +160,7 @@ impl Database {
             .bind(Uuid::new_v4())
             .bind(tag_name)
             .fetch_one(&mut *tx)
-            .await?
+            .await?;
 
             sqlx::query(
                 "
@@ -179,9 +179,9 @@ impl Database {
         )
         .bind(id)
         .fetch_one(&mut *tx)
-        .await?
+        .await?;
 
-        tx.commit().await?
+        tx.commit().await?;
 
         Ok(LinkResponse {
             link,

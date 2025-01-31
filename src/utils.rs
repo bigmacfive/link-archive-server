@@ -36,10 +36,9 @@ pub async fn extract_content(url: &str) -> Result<(String, String), AppError> {
                 .map(|element| element.text().collect::<String>())
                 .collect::<Vec<String>>()
                 .join("\n")
-                .to_string()
         });
 
-    Ok((title, preview))
+    Ok((title.to_string(), preview.to_string()))
 }
 
 pub async fn generate_summary(content: &str) -> Result<String, AppError> {
