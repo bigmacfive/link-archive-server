@@ -1,7 +1,8 @@
 use actix_web::web;
 use actix_web_httpauth::middleware::HttpAuthentication;
+use actix_web_httpauth::extractors::bearer::Bearer;
 
-use super::{middleware, register, login};
+use super::{middleware::{self, auth_validator}, register, login};
 
 pub fn configure(cfg: &mut web::ServiceConfig) {
     cfg.service(
